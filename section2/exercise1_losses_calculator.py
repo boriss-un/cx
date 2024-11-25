@@ -19,7 +19,7 @@ def load_data(filepath: str) -> List[Building]:
         return json.load(file)
 
 
-def calculate_loss_discount(years):
+def calculate_loss_discount(years) -> float:
     return math.pow((1 + DISCOUNT_RATE), years)
 
 
@@ -60,7 +60,7 @@ def main() -> None:
     except ValueError:
         print("Please enter a valid number of years")
         return
-    
+
     data = load_data("data.json")
 
     total_loss = calculate_projected_losses(data, years)
