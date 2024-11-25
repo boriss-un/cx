@@ -45,6 +45,11 @@ Which strategy will give the best results depends on what are the acceptable per
 Calculating complex mathematical loss formula using numpy (function receives building data in chunks, chunk isn't the whole JSON file):
 
 ```python
+DISCOUNT_RATE = 0.05
+
+def calculate_loss_discount(years):
+    return math.pow((1 + DISCOUNT_RATE), years)
+
 def calculate_potential_financial_losses_estimate_unsing_numpy(
     building_data: List[Building], years: int
 ) -> Tuple[float, List[float]]:
