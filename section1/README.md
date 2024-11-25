@@ -1,0 +1,21 @@
+[System Architecture Design](https://mermaid.ink/img/pako:eNqVV1tP4zgU_itWRoNACkyv09KHlUph2O4CSxtmkZbug5s4rVUnrmyHTgfx3_f4kjRpysJEKraPv2Of-zEvXsgj4g28mPFNuMRCoYeLWYrgk9l8IfB6ia5-KCJSzNDTzCvml1hhFPBMhETOvH8ti_5GlwHgRnwNOBpmUhPQ8H5cAd0NgyGg9IAeuWDRMyUbFGBFGKOKoHGCF0Si73tco6ux5oIBjRhNAI6mVK7Q5UUZStJolu7pME7hPEV5qpUwsu8oN3hLROWiiAoSmr3cGPoDJYAZ_qJruHmDt-h4qkW4oQlVNF18GWZqeVI56E8crzAw3RIpQSM0yUhG0DE5W5zZvSp8NysEH3HGQBYuZCH5jlRh1t_0KngAmB60uABNUwOtIYMQjicCwBeCbyQRCKTnYFLQugI21nzLrPeCg_8lKF9IVyK9Z9iSaanQAQhn_CXCJfhFYBDaGcptVk0VrLFY6TspgOk8UyQqX-041xhOs9h3LT0Zah3-xoxG2qtH6EHgVMZcJAeMtySJ9qudIMe0bzqTDozgVCeEHkGyussyRqR2QwaCg_SWUIMVwgC0mB--8k7vMPrT7Op8Ka8_7tsAPKBjNndsvq579f766fieS7UQJJjcoA1VEBmwvh4H2vaKunpxUuK55emCPx2bAdIXtEFTvKnBpiSi8unYDGikvVneDdog3DfKyBdTMAoRrfeD9sn_1oQpgcghz7awGRV3lLqS15pncgNQN6sVtSnEbSn53s3sTELCmXt1fJiVLau_4zRipJ6z39eM4ygX1q5QQMQzDUkNnAdyDv9AjNrqcihQi0B5Q5eh3KZhtRgYUikla7eaWgjAP_hcQrZBG1iRAyUtUFhl0uLcQidDuNoz0Hsi3nFFYxrivAlU1sFWKlLP88fgWtekRzIPOFyo6tJdJZgy3Rf1WOcn8yXnK3uEnv2SxAEJM0HVVkubz2tX6J6jrQ0DSZXTp15kLoYjh-LiUCWwR0VUGRSM6IYv5C-KawJx16dyQt2ltiYADmJAbA8FxxDeGFtQRzu-mNdQOnRcZNziFDI_ARt8vMJ9EzxVsKElHsNMxHhfXPCb9R70knW1AYWCrpXcpa4jHCo5nz_nnRjsLi2t1NhPT38zr6Qj8y7SA7xwDqJ0WUndW8QQzCPCkWybNOTicVPfMs3Qku1fQzBbk2GZDv3Q4G1NrXC4Mmu2cyfbnTwGjLDVouBE2asUGlhOxQPn5PX2yFRYC6jSnCQuRdwJLnn0Vu7o3B-l0lvVoXBXoLaskDlkWMpLEqO1gEen2KKYMjb41Gr3Onjuw_uDr0ixDDnjYvApjuM9ZklCnkY79manN4-aBbtbvsm-pIslg59y7A3c7fbDgt0t99lLhxTveL-IDn_nCN851S96oF-kR3F1-TSIQN9En--iyzeB5DvP-MYvzmBlvl1E-5Ohn5vez_3l7wWIXw4Ov-S4wpye7yUEXjg0gn9jXvRVMw-KYQItcQDTSIe7N0tfAYfhiRvA8d5AiYz4nuDZYukNYswkrLK17peXFEN1SArqGqf_cJ7kLLD0Bi_eD2_QbDTOuq1Wu9ttNRvtXr_b8r2tNzjt9Fpn8Gud9zv91vnXfuvV936aE5pn5_1mr9nrfO21G_1Gp9N6_Q-h9SC3?type=png)
+
+_Data Ingestion Layer_
+
+- Data is pulled from API (e.g. Copernicus CDS API) or downloaded using browser automation from web UI (e.g. NASA Satellite images). Alternative to browser automation would be to reverse engineer (e.g. using Chrome Dev Tools) browser's data download and to implement the same requests in python code.
+- Message Queue is used for messages indicating that there is a new pulled/downloaded data to process.
+
+_Data Processing Layer_
+
+- Orchestrator triggers data pull/download and processing of pulled/downloaded data.
+- Data is processed in batches.
+
+_Data Storage Layer_
+
+- PostGIS extension handles spatial operations (e.g. average calculations in a given region, finding data within given distance).
+- NoSQL db (MongoDB) is primarily used to store pulled/downloaded data before processing.
+- File/Image storage is used for downloaded satellite images.
+
+_Data Retrieval Layer_
+
+- It assumes that there is a need for data retrieval (a) that can be performed using UI and resulting with immediate result and (b) that must be performed in async manner with user notification when retrieval is completed.
