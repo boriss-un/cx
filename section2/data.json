@@ -1,0 +1,37 @@
+[
+    {
+        "buildingId": 1,
+        "floor_area": 2000,
+        "construction_cost": 1200,
+        "hazard_probability": 0.1,
+        "inflation_rate": 0.03
+    },
+    {
+        "buildingId": 2,
+        "floor_area": 1500,
+        "construction_cost": 1300,
+        "hazard_probability": 0.2,
+        "inflation_rate": 0.04
+    },
+    {
+        "buildingId": 3,
+        "floor_area": 1800,
+        "construction_cost": 1400,
+        "hazard_probability": 0.15,
+        "inflation_rate": 0.02
+    },
+    {
+        "buildingId": 4,
+        "floor_area": 1600,
+        "construction_cost": 1500,
+        "hazard_probability": 0.05,
+        "inflation_rate": 0.05
+    },
+    {
+        "buildingId": 5,
+        "floor_area": 2200,
+        "construction_cost": 1100,
+        "hazard_probability": 0.12,
+        "inflation_rate": 0.03
+    }
+]
