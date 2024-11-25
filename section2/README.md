@@ -35,8 +35,8 @@ Scalability analysis:
 
 Strategies for scaling the script from exercise 2:
 
-1. Instead of loading whole JSON file in memory, data could be loaded in chunks. For example, `data.json` can be treated as plain text file, read chunk by chunk (e.g. line by line) and processed as a big string when substrings of that big string will be treated as chunks.
-2. Doing vectorized calculations in `numpy` would cut the calculation time. Once there is more than 1.000.000 buildings to process, numpy calculations on my computer were roughly 2 times faster. For Nx100.000.000 datasets numpy performance were more than 2 times better. See below for `calculate_potential_financial_losses_estimate` function implementions with numpy.
+1. Instead of loading whole JSON file in memory, data could be loaded in chunks. For example, `data.json` can be treated as plain text file read chunk by chunk (e.g. line by line), processed as a string where substrings of that big string will be treated as chunks for processing. Alternative path would be to use alternative file format (e.g. CSV) which is easier to read in chunkgs.
+2. Doing vectorized calculations in `numpy` would cut the calculation time. Once there is more than 1.000.000 buildings to process, numpy calculations were roughly 2 times faster on a computer used for testing. For N x 100.000.000 datasets numpy performance were more than 2 times better. See below for `calculate_potential_financial_losses_estimate` function implementions using numpy.
 3. Further optimisations are possible with explicit parallelization (e.g. joblib, multiprocessing, dask), with computations on GPU (instead of CPU).
 4. A possible altenative to vectorized `numpy` calculations would be to use Cython to compile python code to C code.
 
