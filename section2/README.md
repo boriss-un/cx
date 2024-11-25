@@ -28,10 +28,21 @@ python exercise2_complex_mathematical_loss_formula.py
 
 # Exercise 3: Scaling the Loss Calculation Model
 
+Scalability analysis:
+
+1. Scripts execution time is increasing from 2s for 1.000.000 buildings, to 12s for 10.000.000 buildings and 300s for 100.000.000 buildings. Exact values are less important and dependent on the used hardware, but it's clear that increase isn't linear.
+2. Although memory limit wasn't hit during quick tests, it's obvious that memory constraints will eventually be hit and that naive script implementation has limits.
+
 Strategies for scaling the script from exercise 2:
 
 1. Instead of loading whole JSON file in memory, data could be loaded in chunks. For example, `data.json` can be treated as plain text file, read chunk by chunk (e.g. line by line) and processed as a big string when substrings of that big string will be treated as chunks.
-2. Doing calculations in `numpy` would cut the calculation time. Once there is more than 1.000.000 buildings to process, numpy calculations on my computer were roughly 2 times faster. See below for `calculate_potential_financial_losses_estimate` function implementions with numpy.
+2. Doing vectorized calculations in `numpy` would cut the calculation time. Once there is more than 1.000.000 buildings to process, numpy calculations on my computer were roughly 2 times faster. For Nx100.000.000 datasets numpy performance were more than 2 times better. See below for `calculate_potential_financial_losses_estimate` function implementions with numpy.
+3. Further optimisations are possible with explicit parallelization (e.g. joblib, multiprocessing, dask), with computations on GPU (instead of CPU).
+4. A possible altenative to vectorized `numpy` calculations would be to use Cython to compile python code to C code.
+
+Which strategy will give the best results depends on what are the acceptable performances (e.g. maybe performances without explicit parallelization are already acceptable), availability of CPU/GPU resources, maintainability (e.g. Cython path introduces additional complexity).
+
+Calculating complex mathematical loss formula using numpy (function receives building data in chunks, chunk isn't the whole JSON file):
 
 ```python
 def calculate_potential_financial_losses_estimate_unsing_numpy(
