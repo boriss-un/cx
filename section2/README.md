@@ -42,7 +42,7 @@ Strategies for scaling the script from exercise 2:
 
 Which strategy will give the best results depends on what are the acceptable performances (e.g. maybe performances without explicit parallelization are already acceptable), availability of CPU/GPU resources, maintainability (e.g. Cython path introduces additional complexity).
 
-Calculating complex mathematical loss formula using numpy (function receives building data in chunks, chunk isn't the whole JSON file):
+Calculating complex mathematical loss formula using numpy (function receives **building data in chunks**, chunk is NOT the whole JSON file):
 
 ```python
 DISCOUNT_RATE = 0.05
