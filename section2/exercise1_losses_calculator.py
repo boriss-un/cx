@@ -55,8 +55,11 @@ def calculate_projected_losses(
 def main() -> None:
     try:
         years = int(input("Enter calculation period as number of years: "))
+        if years < 1:
+            raise ValueError
     except ValueError:
         print("Please enter a valid number of years")
+        return
     
     data = load_data("data.json")
 
